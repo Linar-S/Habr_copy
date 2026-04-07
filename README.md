@@ -9,7 +9,7 @@
 Установить ```Django``` и ```psycopg2```
 
 ```bash
-    uv add django psycorg2
+    uv add django psycopg2
 ```
 
 ---
