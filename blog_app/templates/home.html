@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <h1>Привет</h1>
+   {% if not articles%}
+   <div class="home_empty-articles content-block padding-2xs flex flex-center full-size">
+      <span class="font-2xl">Нет статей</span>
+   </div>
+   {% else %}
 
+   {% endif %}
 
 {% endblock %}

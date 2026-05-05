@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .category import category_list
+from .auth import login_page
 
 # Create your views here.
 def home(request):
