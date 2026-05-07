@@ -28,7 +28,7 @@
                 </a>
             </div>
             <div class="header-buttons">
-                {% if requset.user.is_authenticated%}
+                {% if request.user.is_authenticated%}
                 <a href="" title="Создать статьи" class="simple-link margin_r-3xs">
                     <i class="fa-solid fa-pen icon-link "></i>
                 </a>
@@ -36,8 +36,9 @@
                 <a href="" title="Поиск по статьям" class="simple-link margin_r-3xs">
                     <i class="fa-solid fa-magnifying-glass icon-link "></i>
                 </a>
-                {% if requset.user.is_authenticated%}
-                <a href="" class="margin_r-3xs button-link">
+                {{ request.user }}
+                {% if request.user.is_authenticated%}
+                <a href="{% url 'logout' %}" class="margin_r-3xs button-link">
                     Выйти
                 </a>
                 {% else %}
