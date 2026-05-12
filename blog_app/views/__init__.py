@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .category import category_list
+from .category import category_list, category_add
 from .auth import login_page, register_page, logout_page
 
 # Create your views here.

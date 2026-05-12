@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.template.context_processors import request
+
+from blog_app.forms.base import BaseForm
 
 
 class LoginForm(forms.Form):
@@ -13,23 +14,20 @@ class LoginForm(forms.Form):
 
 
 
-class RegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    label_name = {
+class RegisterForm(UserCreationForm, BaseForm):
+    _LABEL_NAME = {
         "username":"Имя пользователя",
         "email":"Электронная почта",
         "password1":"Пароль",
         "password2": "Повторите пароль",
     }
 
+    email = forms.EmailField(required=True)
+
+
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2",]
         
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
-        for filed_name, field in self.fields.items():
-            field.help_text = None
-            field.label = self.label_name[filed_name]
 
