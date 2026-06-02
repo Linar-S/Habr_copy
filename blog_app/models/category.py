@@ -6,4 +6,6 @@ class Category(Model):
     icon = CharField(max_length=20)
     description = TextField(null=True)
 
+    def __str__(self) -> str:
+        return self.name
 

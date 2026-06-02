@@ -1,6 +1,3 @@
-from django.forms import Textarea
-from django.forms.fields import CharField
-
 from blog_app.forms.base import BaseForm
 from blog_app.models import Category
 

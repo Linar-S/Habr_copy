@@ -34,7 +34,7 @@
             </div>
             <div class="header-buttons">
                 {% if request.user.is_authenticated%}
-                <a href="" title="Создать статьи" class="simple-link margin_r-3xs">
+                <a href="{% url 'article-add' %}" title="Создать статьи" class="simple-link margin_r-3xs">
                     <i class="fa-solid fa-pen icon-link "></i>
                 </a>
                 {% endif %}

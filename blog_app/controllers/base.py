@@ -34,7 +34,9 @@ class BaseController:
             if self.model:
                 return self._CLASS_FORM(self._request.POST, instance=self.model)
 
-            return self._CLASS_FORM(self._request.POST)
+            form = self._CLASS_FORM(self._request.POST)
+            self._before_form_save(form)
+            return form
 
         if self.model:
             return self._CLASS_FORM(instance=self.model)
@@ -43,6 +45,8 @@ class BaseController:
             return None
 
         return self._CLASS_FORM()
+
+
 
     def form_page(self):
         if self._is_form_submitted():
@@ -89,3 +93,6 @@ class BaseController:
                 "btn_text": action_prefix,
                 "additional_js": self._ADDITIONAL_JS
             }
+
+    def _before_form_save(self, form):
+        ...

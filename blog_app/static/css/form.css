@@ -24,7 +24,7 @@
 
 }
 
-.form-container input, .form-container textarea {
+.form-container input, .form-container textarea, .form-container select {
     margin-bottom: var(--offset-3xs);
     height: var(--offset-xl);
     border: 0;
