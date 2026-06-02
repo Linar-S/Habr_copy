@@ -12,11 +12,11 @@ class CategoryForm(BaseForm):
         "description":"Описание"
     }
 
-    name = CharField(required=True)
-    icon = CharField(required=True)
-    description = CharField(required=True, widget=Textarea)
+    _CUSTOM_CLASS = {
+        "icon": "category-icon"
+    }
 
     class Meta:
         model = Category
-        fields = ["name", "icon", "description"]
+        fields = "__all__"
 

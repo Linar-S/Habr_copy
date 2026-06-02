@@ -10,6 +10,14 @@
     margin-right: var(--offset-3xs);
 }
 
+.margin_l-3xs{
+    margin-left: var(--offset-3xs);
+}
+
+.margin_b-3xs{
+    margin-bottom: var(--offset-3xs);
+}
+
 .padding-2xs{
     padding: var(--offset-2xs);
 }

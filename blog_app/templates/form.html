@@ -5,6 +5,11 @@
 <link rel="stylesheet" href="{% static 'css/form.css'%}">
 
 {% endblock %}
+{% block custom_js %}
+{% for js in additional_js %}
+<script src="/static/js/{{js}}.js"></script>
+{% endfor %}
+{% endblock %}
 
 {% block content %}
     <h1 class="padding_tb-s"> {{ page_title }} </h1>

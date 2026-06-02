@@ -71,9 +71,20 @@
     border-radius: var(--button-border-radius);
 }
 
-.button-link:hover{
+.button-link:hover, .circle-btn:hover{
     background-color: var(--button-main-color-hover);
 }
+
+.circle-btn{
+    text-decoration: none;
+    background-color: var(--button-main-color);
+    transition: var(--base-transition);
+    padding: var(--offset-4xs);
+    border-radius: 99%;
+    color: var(--header-text-color)
+}
+
+
 
 .content-block{
     

@@ -1,15 +1,12 @@
 from blog_app.controllers.base import BaseController
 from blog_app.forms import CategoryForm
+from blog_app.models import Category
 
 
 class CategoryController(BaseController):
     _CLASS_FORM = CategoryForm
-    _FORM_REDIRECT_PAGE = "category-list"
-    _PAGE_CONTEXT = {
-        "form":{
-            "title": "Добавить категорию",
-            "page_title": "Добавить категорию",
-            "btn_text": "Создать"
-        }
+    _REDIRECT_PAGE = "category-list"
+    _ENTITY_NAME = "категорию"
+    _ADDITIONAL_JS = ["categoryCard"]
+    _MODEL = Category
 
-    }

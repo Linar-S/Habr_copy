@@ -7,17 +7,8 @@ from ..forms import LoginForm, RegisterForm
 
 class LoginController(BaseController):
     _CLASS_FORM = LoginForm
-    _PAGE_CONTEXT = {
-        "form": {
-            "title": "Вход",
-            "page_title": "Вход",
-            "additional_text": "Еще не с нами ?",
-            "additional_link": "/register",
-            "link_text": "Зарегистрируйтесь",
-            "btn_text": "Войти"
-        }
-    }
-    _FORM_REDIRECT_PAGE = "home"
+    _REDIRECT_PAGE = "home"
+
 
     def _form_submit(self):
         username = self.form.cleaned_data["username"]
@@ -38,16 +29,30 @@ class LoginController(BaseController):
         logout(self._request)
         return redirect("login")
 
+    def _get_form_page_context(self) -> dict:
+        return {
+                "form": self.form,
+                "title": "Вход",
+                "page_title": "Вход",
+                "additional_text": "Еще не с нами ?",
+                "additional_link": "/register",
+                "link_text": "Зарегистрируйтесь",
+                "btn_text": "Войти"
+
+        }
+
 class RegisterController(BaseController):
     _CLASS_FORM = RegisterForm
-    _PAGE_CONTEXT = {
-        "form": {
-            "title":"Регистрация",
-            "page_title":"Регистрация в системе",
+    _REDIRECT_PAGE = "login"
+
+    def _get_form_page_context(self) -> dict:
+        return {
+            "form": self.form,
+            "title": "Регистрация",
+            "page_title": "Регистрация в системе",
             "additional_text": "Уже зарегистрированы ?",
             "additional_link": "/login",
-            "link_text":"Авторизуйтесь",
-            "btn_text":"Зарегистрироваться"
+            "link_text": "Авторизуйтесь",
+            "btn_text": "Зарегистрироваться"
+
         }
-    }
-    _FORM_REDIRECT_PAGE = "login"

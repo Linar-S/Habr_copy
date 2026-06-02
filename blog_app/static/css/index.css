@@ -37,3 +37,6 @@ header a{
     width: var(--base-content-wrapper-width);
 }
 
+.header-logo a{
+    text-decoration: none;
+}

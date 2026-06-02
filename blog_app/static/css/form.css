@@ -15,21 +15,23 @@
 .form-container p{
     display: flex;
     flex-direction: column;
+    width: var(--form-input-width);
 }
 
 .form-container label{
-    margin-bottom: 4px;
+    margin-bottom: var(--offset-4xs);
     color:aliceblue;
 
 }
 
-.form-container input{
+.form-container input, .form-container textarea {
     margin-bottom: var(--offset-3xs);
     height: var(--offset-xl);
     border: 0;
     border-radius: 0;
     border-bottom: 1px solid grey;
-    
+    max-width: var(--form-input-width);
+    min-width: var(--form-input-width);
 }
 
 .form-container .button-link{

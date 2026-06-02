@@ -11,7 +11,8 @@
         <link href="{% static 'css/index.css' %}" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         {% block custom_css %}
-
+        {% endblock %}
+        {% block custom_js %}
         {% endblock %}
     </head>
 <body class="full-screen overflow-hidden">
@@ -20,7 +21,11 @@
         <div class="content-wrapper full-height flex flex-ai-center flex-jc-sb">
             <div class="header-logo full-height flex flex-ai-center padding_tb-s">
                 <i class="fa-solid fa-bars icon-link"></i>
-                <h1>Хабр</h1>
+                <a href="{% url 'home' %}">
+                    <h1>
+                        Хабр 
+                    </h1>
+                 </a> 
                 <div class="v-delimiter full-height margin_rl-3xs">
                 </div>
                 <a href="{%url 'category-list' %}" class="simple-link flex flex-ai-center">
