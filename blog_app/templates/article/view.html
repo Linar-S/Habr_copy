@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block custom_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/form.css' %}"
+>
+<link
+    rel="stylesheet"
+    href="{% static 'css/article_view.css' %}"
+>
+{% endblock %}
+
+{% block content %}
+<article class="content-block padding-s margin_t-3xs">
+
+    <div class="margin_b-xs flex flex-js-sb">
+        <a href="{% url 'article-user' article.user.id %}" class="simple-link">
+            {{ article.user }}
+        </a>
+        <a href="{% url 'article-category' article.category.id %}" class="simple-link">
+            {{ article.category }}
+        </a>
+    </div>
+
+    <h2 class="margin_b-xs">{{ article.title }}</h2>
+
+    {% if request.user.id == article.user.id %}
+        <div class="margin_b-xs">
+            <a href="{% url 'article-update' article.id  %}" class="icon-link margin_l-3xs">
+                <i class="fa fa-pen font-s color-base"></i>
+                Редактировать
+            </a>
+            <a href="{% url 'article-delete' article.id  %}" class="icon-link margin_l-3xs">
+                <i class="fa fa-trash font-s color-danger"></i>
+                Удалить
+            </a>
+        </div>
+    {% endif %}
+
+    <p class="margin_t-xs">
+        {{ article.formated_content|safe }}
+    </p>
+
+    <hr class="margin_t-xs">
+
+    <div class="extra-block margin_top-xs flex flex-js-sb">
+        <div class="font-m">
+            <i class="fa fa-thumbs-up font-m"></i>
+            1
+        </div>
+        <div class="font-m">
+            <i class="fa fa-thumbs-down font-m"></i>
+            1
+        </div >
+        <div class="font-m">
+            <i class="fa fa-eye font-m"></i>
+            {{ views_count }}
+        </div >
+                <div class="font-m">
+            <i class="fa fa-comment font-m"></i>
+              {{comments_count}}
+        </div>
+    </div>
+
+</article>
+
+<div class="content-block padding-s margin_t-3xs">
+    <div class="comment-form form-container">
+        <form action="">
+        <textarea rows="10" name="content" id="content" placeholder="Введите ваш комментарий" class="padding-2xs">
+
+        </textarea>
+        <button type="submit" class="button-link margin_t-xs">
+            Отправить
+        </button>
+        </form>
+    </div>
+    <hr class="margin_b-xs">
+    <div class="flex flex-center">
+        {% if not comments %}
+            НЕТ КОММЕТАРИЕВ
+        {% else %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
