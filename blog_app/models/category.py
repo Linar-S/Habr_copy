@@ -1,4 +1,4 @@
-from django.db.models import Model, TextField, CharField
+from django.db.models import Model, CharField, TextField
 
 
 class Category(Model):
@@ -8,4 +8,3 @@ class Category(Model):
 
     def __str__(self) -> str:
         return self.name
-

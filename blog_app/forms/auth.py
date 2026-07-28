@@ -13,21 +13,18 @@ class LoginForm(forms.Form):
     )
 
 
-
 class RegisterForm(UserCreationForm, BaseForm):
     _LABEL_NAME = {
-        "username":"Имя пользователя",
-        "email":"Электронная почта",
-        "password1":"Пароль",
-        "password2": "Повторите пароль",
+        "username": "Имя пользователя",
+        "email": "Электронная почта",
+        "password1": "Пароль",
+        "password2": "Подтверждение пароля"
     }
 
     email = forms.EmailField(required=True)
 
-
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2",]
-        
-
-
+        fields = [
+            "username", "email", "password1", "password2"
+        ]

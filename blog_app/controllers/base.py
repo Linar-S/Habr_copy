@@ -1,7 +1,7 @@
 from functools import cached_property
 
 from django.db.models import Model
-from django.forms import ModelForm
+from django.forms import Form, ModelForm
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 
@@ -13,7 +13,7 @@ class BaseController:
     _ENTITY_NAME: str
     _ADDITIONAL_JS: list[str] = []
 
-    def __init__(self, request: HttpRequest, entity_id: int | None = None) -> None:
+    def __init__(self, request: HttpRequest , entity_id: int | None = None) -> None:
         self._request: HttpRequest = request
         self._is_post: bool = request.method == "POST"
         self._entity_id: int | None = entity_id
@@ -22,14 +22,14 @@ class BaseController:
     def model(self) -> Model | None:
         if not self._MODEL or not self._entity_id:
             return None
+
         try:
-         return self._MODEL.objects.get(pk=self._entity_id)
+            return self._MODEL.objects.get(pk=self._entity_id)
         except Exception:
             return None
 
     @cached_property
     def form(self) -> ModelForm | None:
-
         if self._is_post:
             if self.model:
                 return self._CLASS_FORM(self._request.POST, instance=self.model)
@@ -46,19 +46,37 @@ class BaseController:
 
         return self._CLASS_FORM()
 
-
-
     def form_page(self):
+        if not self._has_access():
+            return redirect(self._REDIRECT_PAGE)
+
         if self._is_form_submitted():
             return redirect(self._REDIRECT_PAGE)
 
         return self._render_form_page()
 
     def delete(self):
+        if not self._has_access():
+            return redirect(self._REDIRECT_PAGE)
         if self.model:
             self.model.delete()
 
         return redirect(self._REDIRECT_PAGE)
+
+    def list_page(self, template: str, title: str, models = None):
+        return render(
+            self._request,
+            template,
+            {
+                "title": title,
+                "entities": (
+                    models
+                    if models is not None
+                    else self._MODEL.objects.all()
+                ),
+                "popular_articles": None
+            }
+        )
 
     def _is_form_submitted(self) -> bool:
         if not self._is_post or not self.form.is_valid():
@@ -71,28 +89,29 @@ class BaseController:
 
         return True
 
-
     def _render_form_page(self):
         if not self.form:
             return redirect(self._REDIRECT_PAGE)
 
-
-
         return render(
             self._request,
             "form.html",
-            self._get_form_page_context(),
+            self._get_form_page_context()
         )
 
     def _get_form_page_context(self) -> dict:
         action_prefix: str = "Добавить" if not self._entity_id else "Изменить"
+
         return {
-                "form": self.form,
-                "title": f"{action_prefix} {self._ENTITY_NAME}",
-                "page_title": f"{action_prefix} {self._ENTITY_NAME}",
-                "btn_text": action_prefix,
-                "additional_js": self._ADDITIONAL_JS
-            }
+            "form": self.form,
+            "title": f"{action_prefix} {self._ENTITY_NAME}",
+            "page_title": f"{action_prefix} {self._ENTITY_NAME}",
+            "btn_text": action_prefix,
+            "additional_js": self._ADDITIONAL_JS
+        }
 
     def _before_form_save(self, form):
         ...
+
+    def _has_access(self):
+        return True

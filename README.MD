@@ -93,7 +93,7 @@
 from django.shortcuts import render
 
 def home_page(request):
-    return render(request, 'home.html')
+    return render(request, 'articles.html')
 ```
 
 * Создать в папке приложения пакет ```urls```. Добавить в ```__init__.py``` маршрут до главной страницы

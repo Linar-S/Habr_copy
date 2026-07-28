@@ -5,7 +5,6 @@
     --header-text-color: aliceblue;
     --link-hover-text-color: rgb(153, 221, 255);
 
-    --offset-4xs: 4px;
     --offset-3xs: 8px;
     --offset-2xs: 12px;
     --offset-xs: 14px;
@@ -34,11 +33,5 @@
     --button-border-radius: 4px;
 
     --block-color: aliceblue;
-
-    --form-input-width: 250px;
-
-    --base-text-color: var(--header-bg-color);
-    --second-text-color: aliceblue;
-    --danger-text-color: red;
     
 }

@@ -1,7 +1,7 @@
-@import './base/variable.css';
+@import './base/variables.css';
 @import './base/base.css';
-@import './base/spacing.css'; 
-@import './base/font.css'; 
+@import './base/spacing.css';
+@import './base/font.css';
 
 * {
     margin: 0;
@@ -9,34 +9,31 @@
     font-family: sans-serif;
     box-sizing: border-box;
     font-size: var(--font-s);
-
+    overflow-wrap: anywhere;
 }
 
-h1{
+h1 {
     font-size: var(--font-l);
 }
 
-
 body {
-    background-color: var(--main-bg-color);   
-    
+    background-color: var(--main-bg-color);
 }
 
-header{
+header {
     height: var(--header-height);
     background-color: var(--header-bg-color);
     color: var(--header-text-color);
-    
 }
 
-header a{
+header a {
     color: var(--header-text-color);
 }
 
-.content-wrapper{
+.content-wrapper {
     width: var(--base-content-wrapper-width);
 }
 
-.header-logo a{
+.header-logo a {
     text-decoration: none;
 }

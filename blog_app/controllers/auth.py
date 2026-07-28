@@ -9,8 +9,7 @@ class LoginController(BaseController):
     _CLASS_FORM = LoginForm
     _REDIRECT_PAGE = "home"
 
-
-    def _form_submit(self):
+    def _form_submit(self) -> bool:
         username = self.form.cleaned_data["username"]
         password = self.form.cleaned_data["password"]
 
@@ -18,7 +17,8 @@ class LoginController(BaseController):
             self._request,
             username=username,
             password=password
-            )
+        )
+
         if user:
             login(self._request, user)
             return True
@@ -31,15 +31,15 @@ class LoginController(BaseController):
 
     def _get_form_page_context(self) -> dict:
         return {
-                "form": self.form,
-                "title": "Вход",
-                "page_title": "Вход",
-                "additional_text": "Еще не с нами ?",
-                "additional_link": "/register",
-                "link_text": "Зарегистрируйтесь",
-                "btn_text": "Войти"
-
+            "form": self.form,
+            "title": "Вход",
+            "page_title": "Вход",
+            "additional_text": "Еще не с нами?",
+            "additional_link": "/register",
+            "link_text": "Зарегистрируйтесь!",
+            "btn_text": "Войти"
         }
+
 
 class RegisterController(BaseController):
     _CLASS_FORM = RegisterForm
@@ -50,9 +50,8 @@ class RegisterController(BaseController):
             "form": self.form,
             "title": "Регистрация",
             "page_title": "Регистрация в системе",
-            "additional_text": "Уже зарегистрированы ?",
+            "additional_text": "Уже с нами?",
             "additional_link": "/login",
-            "link_text": "Авторизуйтесь",
-            "btn_text": "Зарегистрироваться"
-
+            "link_text": "Войдите!",
+            "btn_text": "Создать"
         }
