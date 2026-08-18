@@ -87,7 +87,7 @@ class  ArticleController(BaseController):
             "comments_count": len(comments),
             "views_count": views_count,
             "reaction": ReactionController.get_article_reactions(
-                self._entity_id, self._request.user.id
+                self._entity_id, self._request.user
             )
         }
 

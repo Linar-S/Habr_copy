@@ -50,22 +50,46 @@
     <hr class="margin_t-xs">
     <div class="extra-block margin_t-xs flex flex-js-sb">
         <div class="font-m">
-            <i class="fa fa-thumbs-up font-m {% if request.user.is_authenticated %} reaction-btn-active {%else%} reaction-btn {% endif %}" 
+            <i class="fa fa-thumbs-up font-m 
+            {% if request.user.is_authenticated %} 
+                reaction-btn-active 
+            {%else%} 
+                reaction-btn 
+            {% endif %}
+            {% if reaction.is_my_like %}
+                reaction-set
+            {% endif %}
+            "
+             
             data-entity="article"
             data-id="{{ article.id }}"
             data-operation="like"
             onclick="setReaction()"
             ></i>
+            <span data-type="like">
             {{ reaction.likes }}
+            </span>
         </div>
         <div class="font-m">
-            <i class="fa fa-thumbs-down font-m  {% if request.user.is_authenticated %} reaction-btn-active {%else%} reaction-btn {% endif %}"
+            <i class="fa fa-thumbs-down font-m  
+            {% if request.user.is_authenticated %} 
+                reaction-btn-active 
+            {%else%} 
+                reaction-btn 
+            {% endif %}
+            {% if reaction.is_my_dislike %}
+                reaction-set
+            {% endif %}
+            "
             data-entity="article"
             data-id="{{ article.id }}"
             data-operation="dislike"
             onclick="setReaction()"
             ></i>
+            <span data-type="dislike">
             {{ reaction.dislikes }}
+            </span>
+            
         </div>
         <div class="font-m">
             <i class="fa fa-eye font-m"></i>

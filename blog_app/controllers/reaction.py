@@ -27,7 +27,7 @@ class ReactionController(BaseController):
 
         for item in Reaction.objects.filter(**params):
             field: str = "likes" if item.is_like else "dislikes"
-            my_field: str = "is_my_likes" if item.is_like else "is_my_dislike"
+            my_field: str = "is_my_like" if item.is_like else "is_my_dislike"
 
             result[field] += 1
 
