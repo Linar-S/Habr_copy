@@ -58,6 +58,7 @@ class BaseController:
     def delete(self):
         if not self._has_access():
             return redirect(self._REDIRECT_PAGE)
+
         if self.model:
             self.model.delete()
 

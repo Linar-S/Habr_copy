@@ -4,6 +4,7 @@ from django.shortcuts import render
 from blog_app.forms import ArticleForm
 from .base import BaseController
 from blog_app.models import Article, Category, Comment, View
+from .reaction import ReactionController
 
 
 class  ArticleController(BaseController):
@@ -42,6 +43,20 @@ class  ArticleController(BaseController):
     def view(self):
         article: Article = Article.objects.get(pk=self._entity_id)
 
+        if (
+            self._is_post
+            and (comment := self._request.POST.get("content"))
+        ):
+            new_model: Comment = Comment(
+                content=comment,
+                article=article,
+                user=self._request.user
+            )
+
+            new_model.save()
+        else:
+            self._add_view()
+
 
         return render(
             self._request,
@@ -56,18 +71,41 @@ class  ArticleController(BaseController):
         form.instance.user = self._request.user
 
     def _has_access(self):
-        return (self._request.user
-                and self._entity_id
-                and (entity := self._MODEL.objects.get(pk=self._entity_id))
-                and self._request.user.id == entity.user.id
-                )
+        return (
+            self._request.user
+            and self._entity_id
+            and (entity := self._MODEL.objects.get(pk=self._entity_id))
+            and self._request.user.id == entity.user.id
+        )
 
     def _get_extra_article_data(self, article: Article) -> dict:
-        comments: list[Comment] = Comment.objects.filter(article=article) or []
+        comments: list[Comment] = Comment.objects.filter(article=article).order_by("-id") or []
         views_count: int = len(View.objects.filter(article=article) or [])
 
         return {
             "comments": comments,
             "comments_count": len(comments),
-            "views_count": views_count
+            "views_count": views_count,
+            "reaction": ReactionController.get_article_reactions(
+                self._entity_id, self._request.user.id
+            )
         }
+
+    def _add_view(self) -> None:
+        if self._request.user.id:
+            article = Article.objects.get(pk=self._entity_id)
+            exist_view = View.objects.filter(
+                user = self._request.user,
+                article = article
+            )
+
+            if not exist_view:
+                new_view = View(
+                    user=self._request.user,
+                    article=article
+                )
+                new_view.save()
+        else:
+            viewing_article_str: str = self._request.COOKIES.get("viewing_articles") or ""
+            viewing_articles: list[int] = list(map(int, viewing_article_str.split(","))) if viewing_article_str else []
+            print(viewing_articles)

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 {% if not artiscles %}
 <div class="home_empty-articles content-block 
             paddind-2xs flex flex-center full-size"
@@ -8,6 +9,7 @@
     <span class="font-2xl">Нет статей</span>
 </div>
 {% else %}
+    
     {% for article in articles %}
     if len(self.content) <0 250:
         return self.content

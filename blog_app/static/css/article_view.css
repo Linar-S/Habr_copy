@@ -1,5 +1,23 @@
- .comment-form textarea{
-    max-width: 100%;
+.comment-form textarea {
     min-width: 100%;
+    max-width: 100%;
     height: auto;
-    }
+}
+
+.comment div a {
+    float: right;
+}
+
+.comment {
+    background-color: var(--main-bg-color);
+}
+
+.reaction-btn{
+    color: grey;
+}
+
+.reaction-btn-active{
+    color: black;
+    cursor: pointer;
+}
+
